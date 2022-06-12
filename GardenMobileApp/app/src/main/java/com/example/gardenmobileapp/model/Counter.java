@@ -20,13 +20,13 @@ public class Counter {
 
     //increase count by 1
     public void increase() {
-//        if(this.count == this.max) return;
+        if(this.count == this.max) return;
         this.count += STEP;
     }
 
     //decrease count by 1
     public void decrease() {
-//        if(this.count == this.min) return;
+        if(this.count == this.min) return;
         this.count -= STEP;
     }
 
