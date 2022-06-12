@@ -8,6 +8,10 @@ public class TurnOnOff {
         this.isOn = false;
     }
 
+    public void toggle() {
+        this.isOn = !this.isOn;
+    }
+
     public void turnOn() {
         this.isOn = ON;
     }

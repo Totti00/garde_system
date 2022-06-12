@@ -23,4 +23,8 @@ public class OpenClosed {
     public String getIsOpenToString() {
         return this.isOpen ? "OPEN" : "CLOSED";
     }
+
+    public void toggle() {
+        this.isOpen = !this.isOpen;
+    }
 }
