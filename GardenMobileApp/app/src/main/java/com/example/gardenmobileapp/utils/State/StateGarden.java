@@ -1,4 +1,4 @@
-package com.example.gardenmobileapp.State;
+package com.example.gardenmobileapp.utils.State;
 
 public enum StateGarden {
     AUTOMATIC("AUTOMATIC"),

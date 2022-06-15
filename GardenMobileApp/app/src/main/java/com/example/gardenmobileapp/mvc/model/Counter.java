@@ -1,7 +1,6 @@
-package com.example.gardenmobileapp.model;
+package com.example.gardenmobileapp.mvc.model;
 
 public class Counter {
-    private static final int INIT_STEP = 0;
     private static final int STEP = 1;
 
     private final int max;
@@ -12,7 +11,7 @@ public class Counter {
     public Counter(int min, int max) {
         this.min = min;
         this.max = max;
-        this.count = INIT_STEP;
+        this.count = min;
     }
 
 

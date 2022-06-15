@@ -1,4 +1,4 @@
-package com.example.gardenmobileapp.model;
+package com.example.gardenmobileapp.mvc.model;
 
 public class OpenClosed {
     private static final boolean OPEN = true;
@@ -22,6 +22,10 @@ public class OpenClosed {
 
     public String getIsOpenToString() {
         return this.isOpen ? "OPEN" : "CLOSED";
+    }
+
+    public String getIsOpenForArduino(){
+        return this.isOpen ? "1" : "0";
     }
 
     public void toggle() {

@@ -1,4 +1,4 @@
-package com.example.gardenmobileapp.view;
+package com.example.gardenmobileapp.mvc.view;
 
 import android.view.View;
 import android.widget.Button;

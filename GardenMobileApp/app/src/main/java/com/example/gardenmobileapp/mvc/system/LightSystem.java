@@ -1,14 +1,15 @@
-package com.example.gardenmobileapp.system;
+package com.example.gardenmobileapp.mvc.system;
 
 import android.widget.Button;
 
-import com.example.gardenmobileapp.model.Counter;
-import com.example.gardenmobileapp.model.TurnOnOff;
-import com.example.gardenmobileapp.view.CounterView;
+import com.example.gardenmobileapp.btlib.BluetoothChannel;
+import com.example.gardenmobileapp.mvc.model.Counter;
+import com.example.gardenmobileapp.mvc.model.TurnOnOff;
+import com.example.gardenmobileapp.mvc.view.CounterView;
 
 public class LightSystem {
     public static final int MIN = 0;
-    public static final int MAX = 5;
+    public static final int MAX = 4;
 
     private final TurnOnOff led1;
     private final TurnOnOff led2;
@@ -19,6 +20,8 @@ public class LightSystem {
     private Button led2View;
     private CounterView led3View;
     private CounterView led4View;
+
+    private BluetoothChannel btChannel;
 
     public LightSystem(){
         this.led1 = new TurnOnOff();
@@ -33,30 +36,41 @@ public class LightSystem {
     public void setLed3View(CounterView view) { this.led3View = view; }
     public void setLed4View(CounterView view) { this.led4View = view; }
 
+    public void setBtChannel(BluetoothChannel btChannel) { this.btChannel = btChannel; }
+
     public void build() {
         this.led1View.setOnClickListener(l -> {
             this.toggleLed1();
             this.led1View.setText(this.led1ToString());
+            this.btChannel.sendMessage("l" + this.led1.getIsOpenForArduino());
         });
         this.led2View.setOnClickListener(l -> {
             this.toggleLed2();
             this.led2View.setText(this.led2ToString());
+            this.btChannel.sendMessage("p" + this.led2.getIsOpenForArduino());
         });
+
         this.led3View.setClickIncrementBtn(l -> {
             this.increaseLed3();
             this.led3View.setText(this.led3ToString());
+            this.btChannel.sendMessage("c" + this.led3.getCountToString());
         });
         this.led3View.setClickDecrementBtn(l -> {
             this.decreaseLed3();
             this.led3View.setText(this.led3ToString());
+            this.btChannel.sendMessage("c" + this.led3.getCountToString());
         });
+
         this.led4View.setClickIncrementBtn(l -> {
             this.increaseLed4();
             this.led4View.setText(this.led4ToString());
+            this.btChannel.sendMessage("d" + this.led4.getCountToString());
+
         });
         this.led4View.setClickDecrementBtn(l -> {
             this.decreaseLed4();
             this.led4View.setText(this.led4ToString());
+            this.btChannel.sendMessage("d" + this.led4.getCountToString());
         });
 
         this.led1View.setText(this.led1ToString());

@@ -1,4 +1,4 @@
-package com.example.gardenmobileapp.model;
+package com.example.gardenmobileapp.mvc.model;
 
 public class TurnOnOff {
     private static final boolean ON = true;
@@ -29,4 +29,7 @@ public class TurnOnOff {
     }
 
 
+    public String getIsOpenForArduino() {
+        return this.isOn ? "1" : "0";
+    }
 }
