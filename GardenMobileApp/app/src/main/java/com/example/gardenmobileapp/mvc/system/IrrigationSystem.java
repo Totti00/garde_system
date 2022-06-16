@@ -11,6 +11,7 @@ import com.example.gardenmobileapp.mvc.view.CounterView;
 public class IrrigationSystem {
     public static final int MIN = 1;
     public static final int MAX = 5;
+    private StateSystem stateSystem;
 
     private final OpenClosed irrigation;
     private final Counter counter;
@@ -35,12 +36,14 @@ public class IrrigationSystem {
         this.counterView.setText(this.counterToString());
 
         this.irrigationView.setOnClickListener(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.toggle();
             this.irrigationView.setText(this.isOpenToString());
             this.btChannel.sendMessage(ArduinoCommands.IRRIGATION + this.irrigation.getIsOpenForArduino());
         });
 
         this.counterView.setClickIncrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             if(!this.irrigation.isOpen()) return;
             this.increase();
             this.counterView.setText(this.counterToString());
@@ -49,6 +52,7 @@ public class IrrigationSystem {
         });
 
         this.counterView.setClickDecrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             if(!this.irrigation.isOpen()) return;
             this.decrease();
             this.counterView.setText(this.counterToString());
@@ -72,4 +76,6 @@ public class IrrigationSystem {
         this.irrigationView.setText(this.isOpenToString());
         this.counterView.setText(this.counterToString());
     }
+
+    public void setStateSystem(StateSystem stateSystem) { this.stateSystem = stateSystem; }
 }

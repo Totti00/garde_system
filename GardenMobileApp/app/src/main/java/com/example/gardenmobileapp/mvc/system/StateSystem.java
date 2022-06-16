@@ -37,27 +37,33 @@ public class StateSystem {
 
     public void build() {
         this.allerBtn.setVisibility(android.view.View.INVISIBLE);
+        this.automaticBtn.setVisibility(android.view.View.INVISIBLE);
+        this.setTextStateInView();
 
         this.allerBtn.setOnClickListener(l -> {
+            this.btChannel.sendMessage(ArduinoCommands.STATE_ALARM);
             this.allerBtn.setVisibility(android.view.View.INVISIBLE);
             this.state = StateGarden.AUTOMATIC;
             this.setTextStateInView();
-            this.btChannel.sendMessage(ArduinoCommands.STATE_ALARM);
         });
         this.manualBtn.setOnClickListener(l -> {
+            this.btChannel.sendMessage(ArduinoCommands.STATE_MANUAL);
+            this.manualBtn.setVisibility(android.view.View.INVISIBLE);
+            this.automaticBtn.setVisibility(android.view.View.VISIBLE);
             this.state = StateGarden.MANUAL;
             this.irrigationSystem.reset();
             this.lightSystem.reset();
             this.setTextStateInView();
-            this.btChannel.sendMessage(ArduinoCommands.STATE_MANUAL);
         });
         this.automaticBtn.setOnClickListener(l -> {
-            this.state = StateGarden.AUTOMATIC;
-            this.setTextStateInView();
             this.btChannel.sendMessage(ArduinoCommands.STATE_AUTOMATIC);
+            this.automaticBtn.setVisibility(android.view.View.INVISIBLE);
+            this.manualBtn.setVisibility(android.view.View.VISIBLE);
+            this.state = StateGarden.AUTOMATIC;
+            this.irrigationSystem.reset();
+            this.lightSystem.reset();
+            this.setTextStateInView();
         });
-
-        this.setTextStateInView();
     }
 
     private void setTextStateInView() { this.textView.setText(this.state.getName()); }
@@ -68,4 +74,6 @@ public class StateSystem {
         this.state = StateGarden.ALARM;
         this.setTextStateInView();
     }
+
+    public boolean isManual() { return this.state.equals(StateGarden.MANUAL);  }
 }

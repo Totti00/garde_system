@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         this.stateSystem.setManualBtn(findViewById(R.id.requireManualBtn));
         this.stateSystem.setAutomaticBtn(findViewById(R.id.requireAutomaticBtn));
 
+        this.irrigationSystem.setStateSystem(this.stateSystem);
+        this.lightSystem.setStateSystem(this.stateSystem);
     }
 
     @Override

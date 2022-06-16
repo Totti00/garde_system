@@ -12,6 +12,8 @@ public class LightSystem {
     public static final int MIN = 0;
     public static final int MAX = 4;
 
+    private StateSystem stateSystem;
+
     private final TurnOnOff led1;
     private final TurnOnOff led2;
     private final Counter led3;
@@ -41,34 +43,40 @@ public class LightSystem {
 
     public void build() {
         this.led1View.setOnClickListener(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.toggleLed1();
             this.led1View.setText(this.led1ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_1 + this.led1.getIsOpenForArduino());
         });
         this.led2View.setOnClickListener(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.toggleLed2();
             this.led2View.setText(this.led2ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_2 + this.led2.getIsOpenForArduino());
         });
 
         this.led3View.setClickIncrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.increaseLed3();
             this.led3View.setText(this.led3ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_3 + this.led3.getCountToString());
         });
         this.led3View.setClickDecrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.decreaseLed3();
             this.led3View.setText(this.led3ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_3 + this.led3.getCountToString());
         });
 
         this.led4View.setClickIncrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.increaseLed4();
             this.led4View.setText(this.led4ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_4 + this.led4.getCountToString());
 
         });
         this.led4View.setClickDecrementBtn(l -> {
+            if(!this.stateSystem.isManual()) return;
             this.decreaseLed4();
             this.led4View.setText(this.led4ToString());
             this.btChannel.sendMessage(ArduinoCommands.LED_4 + this.led4.getCountToString());
@@ -102,4 +110,5 @@ public class LightSystem {
         this.led4View.setText(this.led4ToString());
     }
 
+    public void setStateSystem(StateSystem stateSystem) { this.stateSystem = stateSystem; }
 }
