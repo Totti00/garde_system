@@ -3,6 +3,7 @@ package com.example.gardenmobileapp.mvc.system;
 import android.widget.Button;
 
 import com.example.gardenmobileapp.btlib.BluetoothChannel;
+import com.example.gardenmobileapp.command.ArduinoCommands;
 import com.example.gardenmobileapp.mvc.model.Counter;
 import com.example.gardenmobileapp.mvc.model.OpenClosed;
 import com.example.gardenmobileapp.mvc.view.CounterView;
@@ -36,14 +37,14 @@ public class IrrigationSystem {
         this.irrigationView.setOnClickListener(l -> {
             this.toggle();
             this.irrigationView.setText(this.isOpenToString());
-            this.btChannel.sendMessage("r" + this.irrigation.getIsOpenForArduino());
+            this.btChannel.sendMessage(ArduinoCommands.IRRIGATION + this.irrigation.getIsOpenForArduino());
         });
 
         this.counterView.setClickIncrementBtn(l -> {
             if(!this.irrigation.isOpen()) return;
             this.increase();
             this.counterView.setText(this.counterToString());
-            this.btChannel.sendMessage("i" + this.counter.getCountToString());
+            this.btChannel.sendMessage(ArduinoCommands.COUNTER_IRRIGATION + this.counter.getCountToString());
 
         });
 
@@ -51,7 +52,7 @@ public class IrrigationSystem {
             if(!this.irrigation.isOpen()) return;
             this.decrease();
             this.counterView.setText(this.counterToString());
-            this.btChannel.sendMessage("i" + this.counter.getCountToString());
+            this.btChannel.sendMessage(ArduinoCommands.COUNTER_IRRIGATION + this.counter.getCountToString());
 
         });
     }
@@ -64,4 +65,11 @@ public class IrrigationSystem {
 
     public String isOpenToString() { return this.irrigation.getIsOpenToString(); }
 
+    public void reset() {
+        this.irrigation.reset();
+        this.counter.reset();
+
+        this.irrigationView.setText(this.isOpenToString());
+        this.counterView.setText(this.counterToString());
+    }
 }

@@ -3,7 +3,7 @@ package com.example.gardenmobileapp.utils.State;
 public enum StateGarden {
     AUTOMATIC("AUTOMATIC"),
     MANUAL("MANUAL"),
-    ALLER("ALLER");
+    ALARM("ALARM");
 
     private final String name;
 

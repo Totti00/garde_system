@@ -88,6 +88,7 @@ public final class RealBluetoothChannel extends BluetoothChannel {
                     }
                 }
                 catch(Exception e){
+                    Log.d("Errro", "run: stringa vuotaaaa");
                     e.printStackTrace();
                 }
             }

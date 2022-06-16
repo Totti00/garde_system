@@ -50,9 +50,18 @@ public class MainActivity extends AppCompatActivity {
         this.lightSystem.setLed4View(led4View);
 
         this.stateSystem = new StateSystem();
+        this.stateSystem.setIrrigationSystem(this.irrigationSystem);
+        this.stateSystem.setLightSystem(this.lightSystem);
         this.stateSystem.setAllerBtn(findViewById(R.id.allerBtn));
         this.stateSystem.setTextView(findViewById(R.id.textState));
         this.stateSystem.setManualBtn(findViewById(R.id.requireManualBtn));
+        this.stateSystem.setAutomaticBtn(findViewById(R.id.requireAutomaticBtn));
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         this.btServer = new BTServer();
         this.btServer.setIrrigationSystem(this.irrigationSystem);
@@ -64,8 +73,5 @@ public class MainActivity extends AppCompatActivity {
         this.stateSystem.build();
         this.lightSystem.build();
         this.irrigationSystem.build();
-
     }
-
-
 }

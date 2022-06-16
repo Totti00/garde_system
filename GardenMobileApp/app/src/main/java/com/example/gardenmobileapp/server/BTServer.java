@@ -42,4 +42,6 @@ public class BTServer {
         this.connectToBluetoothServerTask.execute();
     }
 
+
+
 }

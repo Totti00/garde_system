@@ -31,4 +31,6 @@ public class OpenClosed {
     public void toggle() {
         this.isOpen = !this.isOpen;
     }
+
+    public void reset() { this.isOpen = !OPEN; }
 }

@@ -17,6 +17,8 @@ public class DefaultConnectionEvent implements ConnectionTask.EventListener {
     private String receivedRemoteDeviceName;
     private String sendRemoteDeviceName;
 
+    private String msg;
+
     public void setIrrigationSystem(IrrigationSystem irrigationSystem) { this.irrigationSystem = irrigationSystem; }
     public void setLightSystem(LightSystem lightSystem) { this.lightSystem = lightSystem; }
     public void setStateSystem(StateSystem stateSystem) { this.stateSystem = stateSystem; }
@@ -31,6 +33,7 @@ public class DefaultConnectionEvent implements ConnectionTask.EventListener {
             @Override
             public void onMessageReceived(String receivedMessage) {
                 DefaultConnectionEvent.this.receivedRemoteDeviceName = channel.getRemoteDeviceName();
+                DefaultConnectionEvent.this.stateSystem.setAlarmState();
             }
 
             @Override
@@ -42,5 +45,6 @@ public class DefaultConnectionEvent implements ConnectionTask.EventListener {
 
     @Override
     public void onConnectionCanceled() { }
+
 
 }

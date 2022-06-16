@@ -32,4 +32,8 @@ public class TurnOnOff {
     public String getIsOpenForArduino() {
         return this.isOn ? "1" : "0";
     }
+
+    public void reset() {
+        this.isOn = !ON;
+    }
 }

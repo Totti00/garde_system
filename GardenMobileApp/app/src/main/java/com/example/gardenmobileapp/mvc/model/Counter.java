@@ -29,4 +29,7 @@ public class Counter {
         this.count -= STEP;
     }
 
+    public void reset() {
+        this.count = this.min;
+    }
 }
